@@ -8,14 +8,20 @@ const BASE_URL =
 
 app.get('/scrapper/:id', async (req, res) => {
   const { data } = await axios.get(BASE_URL + req.params.id)
-  const { tokenName, liquidityLockedInPercent, tokenLockedInUsd, tokenPrice } =
-    data.data
+  const {
+    tokenName,
+    liquidityLockedInPercent,
+    tokenLockedInUsd,
+    tokenCirculatingSupply,
+    tokenLocked,
+    tokenSymbol,
+  } = data.data
   // console.log(data.data)
   res.json({
     tokenName,
     liquidityLockedInPercent,
     tokenLockedInUsd,
-    tokenPrice,
+    [tokenSymbol + ' Locked']: tokenLocked / tokenCirculatingSupply,
   })
 })
 
