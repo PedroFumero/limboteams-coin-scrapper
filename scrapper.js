@@ -35,9 +35,12 @@ const scrapper = async (url) => {
         .innerText.split('(')[1]
         .replace(')', '')
 
-      const lockup_value = document.querySelector(
-        '.ant-card.ant-card-bordered .ant-card-head .ant-card-head-wrapper .ant-card-head-title > div > div > div + div .heading-card'
-      ).innerText
+      const lockup_value = document
+        .querySelector(
+          '.ant-card.ant-card-bordered .ant-card-head .ant-card-head-wrapper .ant-card-head-title > div > div > div + div .heading-card'
+        )
+        .innerText.split('$')[1]
+        .replace(',', '')
 
       const data = {
         name: name || 'Not defined',
