@@ -8,21 +8,25 @@ const BASE_URL =
 
 app.get('/scrapper/:id', async (req, res) => {
   const { data } = await axios.get(BASE_URL + req.params.id)
-  const {
-    tokenName,
-    liquidityLockedInPercent,
-    tokenLockedInUsd,
-    tokenCirculatingSupply,
-    tokenLocked,
-    tokenSymbol,
-  } = data.data
-  // console.log(data.data)
-  res.json({
-    tokenName,
-    liquidityLockedInPercent,
-    tokenLockedInUsd,
-    [tokenSymbol + ' Locked']: tokenLocked / tokenCirculatingSupply,
-  })
+  if (data.data) {
+    const {
+      tokenName,
+      liquidityLockedInPercent,
+      tokenLockedInUsd,
+      tokenCirculatingSupply,
+      tokenLocked,
+      tokenSymbol,
+    } = data.data
+    // console.log(data.data)
+    res.json({
+      tokenName,
+      liquidityLockedInPercent,
+      tokenLockedInUsd,
+      [tokenSymbol + ' Locked']: tokenLocked / tokenCirculatingSupply,
+    })
+  } else {
+    res.json({ msg: "Wasn't possible getting info from that token." })
+  }
 })
 
 app.listen(PORT, () => {
