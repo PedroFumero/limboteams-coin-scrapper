@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer')
 
 const scrapper = async (url) => {
   console.log('Getting info')
-  const browser = await puppeteer.launch({ headless: false })
+  const browser = await puppeteer.launch({ headless: true })
   const page = await browser.newPage()
   await page.goto(url)
   await page.waitForSelector('.ant-card.ant-card-bordered')
